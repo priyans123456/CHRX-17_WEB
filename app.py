@@ -29,7 +29,10 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 import os
 
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 
 
@@ -38,8 +41,19 @@ import os
 app = Flask(__name__)
 
 # MongoDB Atlas Connection URI
-app.config["MONGO_URI"] = "mongodb+srv://riju:Sudiptadey123@cluster0.kpda0.mongodb.net/chrx-17"
+app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 mongo = PyMongo(app)
+
+
+# Check DB connection
+try:
+    # Try to list database names (will raise error if not connected)
+    db_names = mongo.cx.list_database_names()
+    print("✅ MongoDB connected! Available databases:", db_names)
+except Exception as e:
+    print("❌ MongoDB connection failed:", str(e))
+
+
 
 # MongoDB Collections
 users = mongo.db.users
@@ -65,8 +79,8 @@ def login1():
 
 
 # Email Configuration
-EMAIL_ADDRESS = "sudiptadey877@gmail.com"
-EMAIL_PASSWORD = "gnyj cfpt eezr ypjz"
+EMAIL_ADDRESS = "plutonium877@gmail.com"
+EMAIL_PASSWORD = "ayew gkqt rqoi yorb"
 
 
 # Function to generate a 6-digit OTP
@@ -258,7 +272,7 @@ def index2():
 # ✅ Prediction page
 
 # Load model
-MODEL_PATH = "DenseNet121_val_loss (2).keras"
+MODEL_PATH = "DenseNet169 -17_val_loss.keras"
 model = load_model(MODEL_PATH)
 
 
