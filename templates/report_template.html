@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h2 { color: #2c3e50; }
+    ul { padding-left: 20px; }
+    li { margin: 5px 0; }
+    .image { margin: 20px 0; }
+    .image img { width: 224px; height: 224px; }
+    .label { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Top Predicted Diseases</h2>
+  <ul>
+    {% for disease, prob in top_diseases %}
+      <li>{{ disease }}: {{ '%.2f' % (prob * 100) }}%</li>
+    {% endfor %}
+  </ul>
+
+
+</body>
+</html>
